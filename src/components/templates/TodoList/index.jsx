@@ -18,7 +18,7 @@ export const TodoListTemplate = () => {
     searchKeyWord,
     showTodoList,
 
-    handleAddTodoChange,
+    handleAddInputTitleChange,
     handleSearchKeyWordChange,
     handleAddTodo,
     handleDeleteTodo,
@@ -34,7 +34,7 @@ export const TodoListTemplate = () => {
           type={'text'}
           placeholder={'New Todo'}
           value={addInputValue}
-          onChange={handleAddTodoChange}
+          onChange={handleAddInputTitleChange}
           onKeyDown={handleAddTodo}
         />
       </section>

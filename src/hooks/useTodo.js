@@ -17,7 +17,7 @@ export const useTodo = () => {
   /**
    * inputの値更新機能
    */
-  const handleAddTodoChange = (e) => setAddInputValue(e.target.value);
+  const handleAddInputTitleChange = (e) => setAddInputValue(e.target.value);
   const handleSearchKeyWordChange = (e) => setSearchKeyWord(e.target.value);
 
   /**
@@ -68,7 +68,7 @@ export const useTodo = () => {
     searchKeyWord,
     showTodoList,
 
-    handleAddTodoChange,
+    handleAddInputTitleChange,
     handleSearchKeyWordChange,
     handleAddTodo,
     handleDeleteTodo,
