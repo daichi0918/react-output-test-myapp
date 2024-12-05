@@ -22,7 +22,42 @@ describe('useTodo, Hooksテスト', () => {
     });
   });
 
-  // describe('【関数テスト】handleAddTodo', () => {
-  //   test('【正常系】');
-  // });
+  describe('【関数テスト】handleAddTodo', () => {
+    // 予測値
+    let expectTodoList = [];
+    // 引数
+    let eventObject = {
+      target: {
+        value: 'テスト',
+      },
+      key: 'Enter',
+    };
+    test('【正常系】todoList, uniqueIdが更新されること、addInputValueがリセットされること', () => {
+      // 予測値
+      const expectTodoTitle = 'Todo3';
+      expectTodoList = [
+        ...INITIAL_TODO_LIST,
+        {
+          id: 3,
+          title: expectTodoTitle,
+        },
+      ];
+      // 引数
+      eventObject.target.value = expectTodoTitle;
+
+      // hooks呼び出し
+      const { result } = renderHook(() => useTodo());
+      expect(result.current.addInputValue).toBe('');
+      // hooks関数の実行(addInputValueの更新)
+      act(() => result.current.handleAddInputTitleChange(eventObject));
+      expect(result.current.addInputValue).toBe(expectTodoTitle);
+
+      // hooks関数の実行(handleAddInputTitleChangeの実行)
+      act(() => result.current.handleAddTodo(eventObject));
+      // 表示用TodoListが予想通り更新されたこと
+      expect(result.current.showTodoList).toEqual(expectTodoList);
+      // 入力値(addInputValue)がリセットされたこと
+      expect(result.current.addInputValue).toBe('');
+    });
+  });
 });
