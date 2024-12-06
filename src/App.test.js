@@ -150,4 +150,41 @@ describe('useTodo, Hooksテスト', () => {
       expect(result.current.showTodoList).toEqual(expectTodoList);
     });
   });
+  describe('【関数テスト】handleSearchTodo', () => {
+    test('【正常系】検索ワードがある場合、検索された結果が反映される', () => {
+      // 予測値
+      const expectValue = [INITIAL_TODO_LIST[0]];
+      // 引数
+      const eventObject = {
+        target: {
+          value: 'Todo1',
+        },
+      };
+
+      // hooks呼び出し
+      const { result } = renderHook(() => useTodo());
+      // hooks関数の実行
+      act(() => result.current.handleSearchKeyWordChange(eventObject));
+      // 結果判定
+      expect(result.current.showTodoList).toEqual(expectValue);
+    });
+    test('【正常系】検索ワードがない場合、元のTodoリストが反映される', () => {
+      // 予測値
+      const expectValue = INITIAL_TODO_LIST;
+      // 引数
+      const eventObject = {
+        target: {
+          value: 'Todo1',
+        },
+      };
+
+      eventObject.target.value = '';
+      // hooks呼び出し
+      const { result } = renderHook(() => useTodo());
+      // hooks関数の実行
+      act(() => result.current.handleSearchKeyWordChange(eventObject));
+      // 結果判定
+      expect(result.current.showTodoList).toEqual(expectValue);
+    });
+  });
 });
