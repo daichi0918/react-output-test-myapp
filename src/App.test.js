@@ -135,5 +135,19 @@ describe('useTodo, Hooksテスト', () => {
       // 表示用TodoListが予想通り更新されないこと
       expect(result.current.showTodoList).toEqual(expectTodoList);
     });
+    test('【正常系】confirmでキャンセルをクリックした場合、todoが削除されないこと', () => {
+      // 引数
+      const targetId = 1;
+      const targetTitle = 'テスト';
+
+      window.confirm = jest.fn().mockReturnValueOnce(false);
+      // 予測値
+      expectTodoList = INITIAL_TODO_LIST;
+      // hooks呼び出し
+      const { result } = renderHook(() => useTodo());
+      act(() => result.current.handleDeleteTodo(targetId, targetTitle));
+      // 表示用TodoListが予想通り更新されないこと
+      expect(result.current.showTodoList).toEqual(expectTodoList);
+    });
   });
 });
