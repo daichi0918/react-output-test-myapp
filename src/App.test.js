@@ -112,4 +112,28 @@ describe('useTodo, Hooksテスト', () => {
       expect(result.current.addInputValue).not.toBe(expectTodoTitle);
     });
   });
+
+  describe('【関数テスト】handleDeleteTodo', () => {
+    // 予測値
+    let expectTodoList = [];
+
+    beforeEach(() => {
+      // 予測値を初期化
+      expectTodoList = [];
+    });
+    test('【正常系】todoが削除されること', () => {
+      // 引数
+      const targetId = 1;
+      const targetTitle = 'テスト';
+
+      window.confirm = jest.fn().mockReturnValueOnce(true);
+      // 予測値
+      expectTodoList = INITIAL_TODO_LIST.filter((todo) => todo.id !== targetId);
+      // hooks呼び出し
+      const { result } = renderHook(() => useTodo());
+      act(() => result.current.handleDeleteTodo(targetId, targetTitle));
+      // 表示用TodoListが予想通り更新されないこと
+      expect(result.current.showTodoList).toEqual(expectTodoList);
+    });
+  });
 });
