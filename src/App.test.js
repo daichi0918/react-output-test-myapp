@@ -138,7 +138,7 @@ describe('useTodo, Hooksテスト', () => {
     test('【正常系】confirmでキャンセルをクリックした場合、todoが削除されないこと', () => {
       // 引数
       const targetId = 1;
-      const targetTitle = 'テスト';
+      const targetTitle = 'sample';
 
       window.confirm = jest.fn().mockReturnValueOnce(false);
       // 予測値
